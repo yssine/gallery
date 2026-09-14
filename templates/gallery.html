@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}{{ shoot.name }} — Nocturne Studio{% endblock %}
+{% block content %}
+<section class="gallery-head shell">
+  <div><div class="eyebrow">{% if owner_view %}Collection / Private view{% else %}A collection by Nocturne Studio{% endif %}</div><h1>{{ shoot.name }}</h1><p>{{ shoot.client }} <span class="dot">·</span> {{ photos|length }} frames</p></div>
+  <div class="gallery-actions">{% if owner_view %}<button class="button button-small copy-link" data-link="{{ url_for('shared_gallery', slug=shoot.slug, _external=True) }}">Copy share link <span>↗</span></button>{% endif %}<a class="text-link" href="{{ url_for('index') }}">Back to archive</a></div>
+</section>
+<section class="photo-grid shell">
+  {% for photo in photos %}<a class="photo-item" href="{{ url_for('uploaded_file', filename=photo.filename) }}" target="_blank"><img src="{{ url_for('uploaded_file', filename=photo.filename) }}" alt="{{ photo.original_name }}" loading="lazy"><span class="photo-index">{{ "%02d"|format(loop.index) }}</span></a>{% endfor %}
+</section>
+{% endblock %}

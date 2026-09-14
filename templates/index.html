@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Collections — Nocturne Studio{% endblock %}
+{% block content %}
+<section class="hero shell">
+  <div class="eyebrow">Private image delivery <i></i> Est. 2024</div>
+  <h1>Images with<br><em>an atmosphere.</em></h1>
+  <p class="hero-copy">A considered space for your photographs to live.<br>Share the feeling, not just the files.</p>
+  <a class="button" href="{{ url_for('new_shoot') }}">Create a collection <span>↗</span></a>
+  <div class="hero-orbit orbit-one"></div><div class="hero-orbit orbit-two"></div>
+</section>
+<section class="shell collection-section">
+  <div class="section-heading"><div><span class="eyebrow">01 / Archive</span><h2>Your collections</h2></div><span class="muted">{{ shoots|length }} total</span></div>
+  {% if shoots %}
+  <div class="collection-grid">
+    {% for shoot in shoots %}
+    <a class="collection-card" href="{{ url_for('gallery', slug=shoot.slug) }}">
+      <div class="card-image {% if not shoot.cover %}empty-cover{% endif %}">
+        {% if shoot.cover %}<img src="{{ url_for('uploaded_file', filename=shoot.cover) }}" alt="{{ shoot.name }} cover">{% else %}<span>✦</span>{% endif %}
+        <span class="card-arrow">↗</span>
+      </div>
+      <div class="card-meta"><div><h3>{{ shoot.name }}</h3><p>{{ shoot.client }}</p></div><span>{{ "%02d"|format(shoot.photo_count) }} frames</span></div>
+    </a>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="empty-state"><span class="empty-star">✦</span><h3>Your archive is waiting.</h3><p>Create your first collection to begin sharing your work.</p><a class="text-link" href="{{ url_for('new_shoot') }}">Start a collection <span>↗</span></a></div>
+  {% endif %}
+</section>
+{% endblock %}
