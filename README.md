@@ -10,6 +10,6 @@ python3 -m venv .venv
 .venv/bin/python app.py
 ```
 
-Then open <http://127.0.0.1:5000>. Create a collection, add multiple images, and use **Copy share link** from the collection view.
+Then open <http://127.0.0.1:6969>. Create a collection, add multiple images, and use **Copy share link** from the collection view.
 
 Collections and image metadata are stored in `photos.db`; uploaded files are stored in `static/uploads/`.
